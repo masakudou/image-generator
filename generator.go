@@ -15,10 +15,11 @@ type Generator interface {
 }
 
 // Input uses for component config
-// Pos []int is (x,y) coordinate, Res []int is (width, height)
 type Input struct {
-	Pos []int
-	Res []int
+	PosX int
+	PosY int
+	Width int
+	Height int
 }
 
 // NewGenerator returns Generator interface.
@@ -32,7 +33,7 @@ func NewGenerator(baseImage image.Image, componentConfig []Input) (Generator, er
 
 	for _, v := range componentConfig {
 		comp := &model.Component{}
-		comp.SetFrame(v.Pos, v.Res)
+		comp.SetFrame(v.PosX, v.PosY, v.Width, v.Height)
 		comp.FrameWidth = 10
 
 		generator.components = append(generator.components, comp)

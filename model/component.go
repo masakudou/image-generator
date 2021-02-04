@@ -20,9 +20,9 @@ type Component struct {
 	Height int
 }
 
-func (c *Component) SetFrame(xy, wh []int) {
-	c.PosX = xy[0]
-	c.PosY = xy[1]
-	c.Width = wh[0]
-	c.Height = wh[1]
+func (c *Component) SetFrame(x,y,w,h int) {
+	c.PosX = x
+	c.PosY = y
+	c.Width = w
+	c.Height = h
 }

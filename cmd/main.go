@@ -28,8 +28,7 @@ func main() {
 
 	input := []image_generator.Input{
 		{
-			Pos: []int{350, 200},
-			Res: []int{720, 480},
+			PosX: 200, PosY: 200, Width: 300, Height: 200,
 		},
 	}
 
