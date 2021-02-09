@@ -1,8 +1,11 @@
 package main
 
 import (
-	image_generator "github.com/masakudou/image-generator"
+	ig "github.com/masakudou/image-generator"
+	ig_model "github.com/masakudou/image-generator/model"
+	ig_components "github.com/masakudou/image-generator/components"
 	"image"
+	"image/color"
 	"image/jpeg"
 	_ "image/jpeg"
 	_ "image/png"
@@ -26,18 +29,35 @@ func main() {
 		log.Fatal(err)
 	}
 
-	input := []image_generator.Input{
-		{
-			PosX: 200, PosY: 200, Width: 300, Height: 200,
+	components := []ig_model.ImageGeneratorComponent{}
+	s := &ig_components.SquareFrame{
+		Color: color.RGBA{
+			R: 0,
+			G: 255,
+			B: 255,
+			A: 255,
 		},
-	}
+		Rect: image.Rect(240, 340, 1240, 840),
 
-	g, err := image_generator.NewGenerator(img, input)
-	if err != nil {
-		log.Fatal(err)
+		Width: 10,
 	}
+	a := &ig_components.AnotherSquareFrame{
+		Color: color.RGBA{
+			R: 255,
+			G: 0,
+			B: 255,
+			A: 255,
+		},
+		Rect: image.Rect(440, 540, 1340, 1040),
 
-	result, err := g.Generate()
+		Width: 10,
+	}
+	components = append(components, s)
+	components = append(components, a)
+
+	g := ig.NewGenerator(img, components)
+
+	result := g.Generate()
 	if err != nil {
 		log.Fatal(err)
 	}
